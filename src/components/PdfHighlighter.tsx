@@ -117,7 +117,7 @@ export class PdfHighlighter<T_HT extends IHighlight> extends PureComponent<
   highlightRoots: {
     [page: number]: { reactRoot: Root; container: Element };
   } = {};
-  unsubscribe = () => {};
+  unsubscribe = () => { };
 
   constructor(props: Props<T_HT>) {
     super(props);
@@ -388,7 +388,7 @@ export class PdfHighlighter<T_HT extends IHighlight> extends PureComponent<
         ...pageViewport.convertToPdfPoint(
           0,
           scaledToViewport(boundingRect, pageViewport, usePdfCoordinates).top -
-            scrollMargin
+          scrollMargin
         ),
         0,
       ],
@@ -466,12 +466,26 @@ export class PdfHighlighter<T_HT extends IHighlight> extends PureComponent<
       return;
     }
 
+    if (!asElement(event.target).closest(".PdfHighlighter__highlight-layer .Highlight__part")) {
+      const elements = document.getElementsByClassName("PdfHighlighter__highlight-layer");
+      for (let i = 0; i < elements.length; i++) {
+        asElement(elements[i]).style.zIndex = "-1"
+      }
+    }
+
     if (asElement(event.target).closest(".PdfHighlighter__tip-container")) {
       return;
     }
 
     this.hideTipAndSelection();
   };
+
+  onMouseUp: PointerEventHandler = () => {
+    const elements = document.getElementsByClassName("PdfHighlighter__highlight-layer");
+    for (let i = 0; i < elements.length; i++) {
+      asElement(elements[i]).style.zIndex = "3"
+    }
+  }
 
   handleKeyDown = (event: KeyboardEvent) => {
     if (event.code === "Escape") {
@@ -551,7 +565,7 @@ export class PdfHighlighter<T_HT extends IHighlight> extends PureComponent<
     const { onSelectionFinished, enableAreaSelection } = this.props;
 
     return (
-      <div onPointerDown={this.onMouseDown}>
+      <div onPointerDown={this.onMouseDown} onPointerUp={this.onMouseUp}>
         <div
           ref={this.containerNodeRef}
           className="PdfHighlighter"
