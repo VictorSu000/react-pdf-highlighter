@@ -10,13 +10,11 @@ body {
 .sidebar {
   overflow: auto;
   color: rgb(119, 119, 119);
-  background: linear-gradient(
-    rgb(249, 248, 247),
-    rgb(251, 250, 248) 46px,
-    rgb(251, 251, 249) 120px,
-    rgb(248, 247, 245) 35%,
-    rgb(249, 248, 246)
-  );
+  background: linear-gradient(rgb(249, 248, 247),
+      rgb(251, 250, 248) 46px,
+      rgb(251, 251, 249) 120px,
+      rgb(248, 247, 245) 35%,
+      rgb(249, 248, 246));
 }
 
 .sidebar__highlights {
@@ -31,9 +29,24 @@ body {
 }
 
 .highlight__image {
+  display: inline-block;
   overflow: auto;
-  max-width: 300px;
+  margin-top: 0.5rem;
+  margin-right: 20px;
+  max-width: 100px;
+  max-height: 100px;
   border: 1px dashed;
+}
+
+.highlight__text {
+  margin-top: 0.5rem;
+  font-size: 12px;
+  color: rgb(119, 119, 119);
+}
+
+.highlight__comment {
+  color: rgb(50, 50, 50);
+  vertical-align: top;
 }
 
 .sidebar__highlight {
@@ -54,11 +67,13 @@ a {
 blockquote {
   padding: 0;
   margin: 0;
-  quotes: "\201c" "\201d";
+  quotes: "\201c""\201d";
 }
+
 blockquote:before {
   content: open-quote;
 }
+
 blockquote:after {
   content: close-quote;
 }
