@@ -7,6 +7,7 @@
 
 .PdfHighlighter__highlight-layer {
   position: absolute;
+  z-index: 3;
   left: 0;
 }
 
