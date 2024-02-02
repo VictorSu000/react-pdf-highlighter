@@ -470,7 +470,7 @@ export class PdfHighlighter<T_HT extends IHighlight> extends PureComponent<
       return;
     }
 
-    if (!asElement(event.target).closest(".PdfHighlighter__highlight-layer .Highlight__part")) {
+    if (!asElement(event.target).closest(".PdfHighlighter__highlight-layer")) {
       const elements = document.getElementsByClassName("PdfHighlighter__highlight-layer");
       for (let i = 0; i < elements.length; i++) {
         asElement(elements[i]).style.zIndex = "-1"
