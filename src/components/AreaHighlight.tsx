@@ -9,6 +9,7 @@ import type { ViewportHighlight } from "../types";
 interface Props {
   highlight: ViewportHighlight;
   isScrolledTo: boolean;
+  onClick?: () => void;
 }
 
 export class AreaHighlight extends Component<Props> {
@@ -17,11 +18,11 @@ export class AreaHighlight extends Component<Props> {
 
     return (
       <div
-        className={`AreaHighlight ${isScrolledTo ? "AreaHighlight--scrolledTo" : ""
-          }`}
+        className={`AreaHighlight ${isScrolledTo ? "AreaHighlight--scrolledTo" : ""}`}
       >
         <Rnd
           className="AreaHighlight__part"
+          style={{ cursor: "pointer" }}
           enableResizing={false}
           disableDragging={true}
           position={{
@@ -31,10 +32,6 @@ export class AreaHighlight extends Component<Props> {
           size={{
             width: highlight.position.boundingRect.width,
             height: highlight.position.boundingRect.height,
-          }}
-          onClick={(event: Event) => {
-            event.stopPropagation();
-            event.preventDefault();
           }}
           {...otherProps}
         />

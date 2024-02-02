@@ -77,3 +77,21 @@ blockquote:before {
 blockquote:after {
   content: close-quote;
 }
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+    border: 2px solid rgb(119, 119, 119);
+    border-radius: 10px;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+    border: 2px solid rgb(119, 119, 119);
+    border-radius: 10px;
+  }
+}

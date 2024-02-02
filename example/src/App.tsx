@@ -109,6 +109,20 @@ class App extends Component<{}, State> {
     });
   }
 
+  sidebarScrollToHighlight(highlight: IHighlight) {
+    const index = this.state.highlights.findIndex(v => v.id === highlight.id);
+    if (index >= 0) {
+      const element = document.querySelector(`.sidebar__highlight:nth-child(${index + 1})`);
+      element?.scrollIntoView({ behavior: "smooth" });
+      if (element) {
+        (element as HTMLElement).style.animation = "blink 1s linear";
+      }
+      setTimeout(() => {
+        (element as HTMLElement).style.animation = "";
+      }, 1500);
+    }
+  }
+
   render() {
     const { url, highlights } = this.state;
 
@@ -171,11 +185,13 @@ class App extends Component<{}, State> {
                       isScrolledTo={isScrolledTo}
                       position={highlight.position}
                       comment={highlight.comment}
+                      onClick={() => this.sidebarScrollToHighlight(highlight)}
                     />
                   ) : (
                     <AreaHighlight
                       isScrolledTo={isScrolledTo}
                       highlight={highlight}
+                      onClick={() => this.sidebarScrollToHighlight(highlight)}
                     />
                   );
 
